@@ -7,7 +7,11 @@ block content
     else
         a.my-account(href="/my-account") My account 
         a#logout-user.my-account.logout(href="#") logout
-        
+    header.header
+        nav.nav--logo
+            a.nav__ele.header--logo(href='/overview')
+                img.header__logo.icons(src='/icons/auth.svg' alt='Auth logo')
+                span.logo-title Auth    
     .git-wrapper 
         h1.git-title DevFinder 
         .git-search 

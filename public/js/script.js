@@ -72,7 +72,7 @@ const userLogin = async function (data) {
 
     errorDisplay(`${response.message}`, "success");
 
-    window.setTimeout(() => location.assign("/"), 1000);
+    window.setTimeout(() => location.assign("/overview"), 1000);
   } catch (err) {
     errorDisplay(`${err.message}`, "error");
   }
@@ -148,7 +148,7 @@ const userSignup = async function (data, endPoint) {
 
     if (response.status !== "success") throw new Error(response.message);
 
-    if (endPoint === "signup") window.setTimeout(() => location.assign("/"), 1000);
+    if (endPoint === "signup") window.setTimeout(() => location.assign("/overview"), 1000);
 
     return response;
   } catch (err) {
