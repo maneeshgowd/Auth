@@ -15,7 +15,7 @@ const DB = process.env.DATABASE.replace("<password>", process.env.DATABASE_PASSW
 
 mongoose.connect(DB);
 
-const server = app.listen(process.env.PORT, "127.0.0.1", () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   console.log(`Server started on port: ${process.env.PORT}`);
 });
 
@@ -25,4 +25,12 @@ process.on("unhandledRejection", (err) => {
   console.log("--------------UNHANDLED REJECTION----------------");
   console.log(`${err.name} : ${err.message}`);
   server.close(() => process.exit(1)); // sclosing server, shutdown application;
+});
+
+process.on("SIGTERM", () => {
+  console.log("SIGTERM RECEIVED. Shutting down gracefully! 😊");
+
+  server.close(() => {
+    console.log(" 😊Process terminated!");
+  });
 });

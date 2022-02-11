@@ -144,7 +144,7 @@
 
 .user__edit {
   width: 100%;
-  height: 38.7em;
+  height: 34.5em;
 }
 
 .info--title {
@@ -267,6 +267,7 @@
   grid-column: 2 / -1;
   @include style.buttonStyle(style.color(accent-clr), style.color(white-clr));
   @include style.buttonAnim();
+  height: 2.8em;
 }
 
 .info-form input,

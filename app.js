@@ -6,13 +6,15 @@ const xss = require("xss-clean");
 const rateLimit = require("express-rate-limit");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
-
+const cors = require("cors");
 const userRoute = require("./routes/userRoutes");
 const viewRoute = require("./routes/viewRoutes");
 const errorController = require("./controller/errorController");
 const ApiError = require("./utils/apiError");
 
 const app = express();
+
+app.enable("trust proxy");
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
@@ -22,6 +24,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // set security HTPP headers
 app.use(helmet());
+
+app.use(cors());
+
+app.options("*", cors());
 
 // body parser
 app.use(express.json({ limit: "10kb" }));

@@ -7,6 +7,8 @@ route.post("/validate", authController.otp);
 route.post("/login", authController.login);
 route.get("/logout", authController.protect, authController.logoutUser);
 
+route.post("/gitData", authController.protect, userController.getGithubUser);
+
 // forgot and reset password
 
 route.post("/forgotPassword", authController.forgotPassword);
@@ -27,6 +29,7 @@ route.patch(
   userController.updateMe
 );
 route.delete("/deleteMe", authController.restrict("user", "admin"), authController.closeAccount);
+route.delete("/deleteUser/:id", authController.restrict("admin"), userController.deleteUser);
 
 // route.get("/", authController.restrict("admin"), userController.getAllUsers);
 route.route("/:userID").get(authController.restrict("admin"), userController.getUser);

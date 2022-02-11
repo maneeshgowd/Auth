@@ -8,8 +8,6 @@ block content
                     a.nav__ele.header--logo(href='/')
                         img.header__logo.icons(src='/icons/auth.svg' alt='Auth logo')
                         span.logo-title Auth
-                nav.links
-                    a.links__ele(href='/') home
             section.user
                 aside.user__overview
                     h1.user__overview__title User Information
@@ -25,31 +23,40 @@ block content
                         .user__btn.info--btn
                             button#user-personel-info.user-settings-btn personel info
                             svg(width='80' height='80' viewbox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg')
-                                path(d='M40 75C59.33 75 75 59.33 75 40C75 20.67 59.33 5 40 5C20.67 5 5 20.67 5 40C5 59.33 20.67 75 40 75Z' fill='#17823C')
+                                path(d='M40 75C59.33 75 75 59.33 75 40C75 20.67 59.33 5 40 5C20.67 5 5 20.67 5 40C5 59.33 20.67 75 40 75Z' fill='#804ddd')
                                 path(d='M40 15C34.476 15 30 19.478 30 25C30 30.522 34.476 35 40 35C45.524 35 50 30.522 50 25C50 19.478 45.524 15 40 15Z' fill='white')
                                 path(d='M40 40C22.5017 40.0105 22.5 51.0769 22.5 51.0769V55.5769C22.5 55.5769 25.7307 62.5 40 62.5C54.2693 62.5 57.5 55.5769 57.5 55.5769V51.0769C57.5 51.0769 57.5 39.9931 40.0035 40H40Z' fill='white')
                         .user__btn
                             button#user-password.user-settings-btn password
-                            svg.icon.icon-tabler.icon-tabler-eye(xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewbox='0 0 24 24' stroke-width='1.5' stroke='#176c36' fill='none' stroke-linecap='round' stroke-linejoin='round')
+                            svg.icon.icon-tabler.icon-tabler-eye(xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewbox='0 0 24 24' stroke-width='1.5' stroke='#804ddd' fill='none' stroke-linecap='round' stroke-linejoin='round')
                                 path(stroke='none' d='M0 0h24v24H0z' fill='none')
                                 circle(cx='12' cy='12' r='2')
                                 path(d='M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7')
                         .user__btn
                             button#close-account.user-settings-btn close account
-                            svg.icon.icon-tabler.icon-tabler-x(xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewbox='0 0 24 24' stroke-width='1.5' stroke='#176c36' fill='none' stroke-linecap='round' stroke-linejoin='round')
+                            svg.icon.icon-tabler.icon-tabler-x(xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewbox='0 0 24 24' stroke-width='1.5' stroke='#804ddd' fill='none' stroke-linecap='round' stroke-linejoin='round')
                                 path(stroke='none' d='M0 0h24v24H0z' fill='none')
                                 line(x1='18' y1='6' x2='6' y2='18')
                                 line(x1='6' y1='6' x2='18' y2='18')
                 main.user__edit
                     #personel-info.personel-info
                         h1.personel__title.info--title Personel Information
-                        form#submit-user-data.info-form(action='')
+                        form#submit-user-data.info-form(action='#')
                             .form__name
                                 input#name(type='text' name='name' minlength='5' maxlength='20' placeholder="your name")
                                 label(for='name') name
                             .form__email
                                 input#create-email(type='email' name='email' aria-required='false' placeholder=`example@gmail.com`)
                                 label(for='email') email
+                            .form__gender
+                                select#gender(name="gender")
+                                    option(value="male") Male
+                                    option(value="female") Female
+                                    option(value="others") Others
+                                //- label(for="gender") Gender: 
+                            .form__dob 
+                                input#dob(type="date" name="dob"  min="1940-01-01" max="2010-12-31")
+                                label(for="userDob") Date of birth:
                             .form__location
                                 select#select(name='country')
                                     option(value='India') India
@@ -74,7 +81,7 @@ block content
                             button.about__btn submit
                     #close-info.close.hidden-helper
                         h1.close__title.info--title Close Account
-                        form#close-account.close-info(action='')
+                        form#close-user-account.close-info(action='')
                             .form__password
                                 input#close-password(type='password' name='password' minlength='5' maxlength='20')
                                 label(for='password') password
@@ -82,4 +89,3 @@ block content
                             blockquote
                                 strong Note:
                                 |  This action cannot be undone.
-        include _menu

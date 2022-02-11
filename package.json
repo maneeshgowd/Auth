@@ -6,15 +6,18 @@
   "scripts": {
     "start": "nodemon server.js",
     "scss": "sass --watch public/scss:public/css",
-    "js": "parcel watch public/js/script.js --out-dir public/bundledJS"
+    "js": "parcel watch public/js/script.js --out-dir public/bundledJS",
+    "devjs": "parcel build public/js/script.js --out-dir public/bundledJS"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "core-js": "^3.20.3",
+    "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "express-mongo-sanitize": "^2.2.0",
@@ -38,6 +41,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.16.7",
     "eslint": "^8.7.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",

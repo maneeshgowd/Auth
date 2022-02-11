@@ -1,0 +1,188 @@
+@use "_helper" as style;
+
+.git-wrapper {
+  background-color: inherit;
+  max-width: 45rem;
+  margin: 6rem auto 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.git-title {
+  @include style.font(style.color(accent-clr), clamp(1.125rem, 5vw, 1.5rem), style.font(bold));
+  margin-bottom: 1rem;
+}
+
+.git-search {
+  position: relative;
+  width: 100%;
+  min-height: 4em;
+  background-color: style.color(bg-clr);
+  filter: drop-shadow(0 20px 20px rgba(style.color(accent-dark), 0.1));
+}
+
+.git-search img {
+  position: absolute;
+  left: 2%;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+.search {
+  width: 100%;
+  height: 4rem;
+  border: 0;
+  background-color: transparent;
+  padding-left: 3rem;
+}
+
+.search-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-10%, -50%);
+  padding: 1rem 1.5rem;
+  color: style.color(white-clr);
+  background-color: style.color(accent-clr);
+}
+
+.delete-user {
+  padding: 1rem 1.5rem;
+  color: style.color(white-clr);
+  background-color: style.color(accent-clr);
+}
+
+.git-result {
+  margin-top: 1em;
+  padding: 1.5rem;
+  width: 100%;
+  display: flex;
+  gap: 2em;
+  background-color: style.color(bg-clr);
+  filter: drop-shadow(0 20px 20px rgba(style.color(accent-dark), 0.1));
+  transition: all 300ms ease;
+}
+
+.git-user-img {
+  width: 8em;
+  height: 8em;
+  border-radius: 50%;
+  background-color: style.color(accent-clr);
+}
+
+.user-name {
+  @include style.font(style.color(typo-clr), 1.5rem, style.font(bold));
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.user-subname {
+  @include style.font(style.color(typo-clr), 1rem, style.font(bold));
+  margin-bottom: 1rem;
+}
+
+.user-bio {
+  margin-bottom: 2rem;
+}
+
+.user-follower {
+  width: 100%;
+  border-radius: 1em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  background-color: lighten(style.color(accent-clr), 30%);
+}
+
+.user-fol {
+  @include style.font(style.color(accent-dark), 1rem, style.font(semi-bold));
+}
+
+.user-foll {
+  @include style.font(style.color(accent-dark), 1.5rem, style.font(bold));
+}
+
+.user-infoo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1em;
+  margin-top: 2em;
+}
+
+.infoo {
+  display: flex;
+  gap: 2em;
+}
+
+.infoo:nth-child(1),
+.infoo:nth-child(3) {
+  margin-right: 3em;
+}
+
+.infoo-title {
+  @include style.font(style.color(typo-clr), 1rem, style.font(semi-bold));
+}
+
+.icon--mini {
+  width: 1.5em;
+}
+
+.my-account {
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  padding: 1rem 1.5rem;
+  color: style.color(white-clr);
+  background-color: style.color(accent-clr);
+  text-decoration: none;
+}
+
+.logout {
+  right: 12em;
+}
+
+/////////////////////////////////
+.user-base {
+  margin: 0 auto;
+  max-width: 45em;
+  padding: 1.5em;
+  display: flex;
+  gap: 2em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-detail {
+  display: flex;
+  padding: 1rem;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  filter: drop-shadow(0 20px 20px rgba(style.color(accent-dark), 0.1));
+
+  & img {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background-color: style.color(accent-clr);
+  }
+
+  & .user-namee {
+    @include style.font(style.color(typo-clr), 1.125rem, style.font(semi-bold));
+  }
+
+  & .user-date {
+    font-size: 0.9rem;
+    font-weight: style.font(semi-bold);
+    color: style.color(typo-clr);
+  }
+}
+
+.name-txt {
+  text-align: left;
+  width: 10em;
+}

@@ -17,7 +17,7 @@ html {
 body {
   width: 100%;
   background-color: #eee;
-  overflow: hidden;
+  // overflow: hidden;
   font-family: Raleway, open sans, sans-serif;
 
   @include style.large() {

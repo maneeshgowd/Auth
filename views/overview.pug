@@ -1,6 +1,51 @@
 extends base
 
-block content 
-    div.signed
-        h1.home-title Successfully signed
-        h2 #{user.name}
+block content
+    if user.role === 'admin'
+        a.my-account(href="/admin") Admin panel
+        a#logout-user.my-account.logout(href="#") logout
+    else
+        a.my-account(href="/my-account") My account 
+        a#logout-user.my-account.logout(href="#") logout
+        
+    .git-wrapper 
+        h1.git-title DevFinder 
+        .git-search 
+            input#searchInput.search(type="text", name="search-bar" placeholder="search Github username.." required)
+            button#search-git-user.search-btn Search 
+            img.icons--mini(src="/icons/search.svg", alt="search")
+        #gitResult.git-result 
+            img.git-user-img(src="" alt="")
+            .git-content 
+                h1.user-name The user 
+                h2.user-subname theuser 
+                p.user-bio Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum voluptate adipisci quae quisquam perspiciatis accusantium voluptas, sequi praesentium! Odio, eum.
+                .user-follower 
+                    .user-follo 
+                        h2.user-fol Repo 
+                        h2.user-foll 2
+                    .user-follo 
+                        h2.user-fol Followers 
+                        h2.user-foll 22
+                    .user-follo 
+                        h2.user-fol Following
+                        h2.user-foll 4
+                .user-infoo 
+                    .infoo
+                        img.icon--mini(src="/icons/location.svg", alt="location")
+                        h2.infoo-title San Francisco 
+                    .infoo
+                        img.icon--mini(src="/icons/link.svg", alt="location")
+                        h2.infoo-title https://github.blog 
+                    .infoo
+                        img.icon--mini(src="/icons/twitter.svg", alt="location")
+                        h2.infoo-title San Francisco 
+                    .infoo
+                        img.icon--mini(src="/icons/github.svg", alt="location")
+                        h2.infoo-title agithub
+                    
+
+
+                    
+                 
+        

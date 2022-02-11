@@ -1,5 +1,6 @@
 const multer = require("multer");
 const sharp = require("sharp");
+const axios = require("axios");
 const Model = require("../models/userModel");
 const ApiError = require("../utils/apiError");
 const catchAsync = require("../utils/catchAsync");
@@ -22,7 +23,6 @@ const upload = multer({
 exports.uploadUserPhoto = upload.single("photo");
 
 exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
-  console.log(req.file, req.body);
   if (!req.file) return next();
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
@@ -75,4 +75,26 @@ exports.getMe = catchAsync(async (req, res, next) => {
 
 exports.getAllUsers = handleFactory.getAll(Model);
 exports.getUser = handleFactory.getOne(Model);
- 
+
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  const user = await Model.findByIdAndDelete(req.params.id);
+
+  if (!user) return next(new ApiError("Invalid user!", 404));
+
+  res.status(201).json({
+    status: "success",
+    data: null,
+  });
+});
+
+exports.getGithubUser = catchAsync(async (req, res, next) => {
+  axios
+    .get(`https://api.github.com/users/${req.body.user}`)
+    .then((response) => res.send(JSON.stringify(response.data)))
+    .catch(() =>
+      res.status(400).json({
+        status: "fail",
+        message: "Not found!",
+      })
+    );
+});

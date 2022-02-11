@@ -114,7 +114,7 @@
 }
 
 .form input,
-.form select {
+form select {
   @include style.input();
   margin-bottom: 2em;
   transition: all 300ms ease;

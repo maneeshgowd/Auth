@@ -95,6 +95,11 @@ const schema = new mongoose.Schema({
     default: true,
     select: false,
   },
+
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 // hashing password

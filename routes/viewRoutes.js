@@ -7,6 +7,9 @@ router.route("/signup").get(viewController.signup);
 
 router.route("/").get(authController.isLoggedIn, viewController.overview);
 
-// router.route("/my-account").get(authController.protect, viewController.user);
+router.route("/my-account").get(authController.protect, viewController.user);
+router
+  .route("/admin")
+  .get(authController.protect, authController.restrict("admin"), viewController.admin);
 
 module.exports = router;

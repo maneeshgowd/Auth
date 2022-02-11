@@ -14,15 +14,14 @@ const signInToken = (id) =>
     expiresIn: process.env.JWT_EXPIRESIN,
   });
 
-const createAndSendToken = (user, statusCode, res) => {
+const createAndSendToken = (req, user, statusCode, res) => {
   const token = signInToken(user._id);
 
   const cookieOptions = {
     expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRESIN * 24 * 60 * 60 * 1000),
     httpOnly: true,
+    secure: req.secure || req.headers["x-forwarded-proto"] === "https",
   };
-
-  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
 
   res.cookie("jwt", token, cookieOptions);
 
@@ -36,7 +35,19 @@ const createAndSendToken = (user, statusCode, res) => {
 exports.otp = catchAsync(async (req, res) => {
   const filteredData = filterBody(req.body, "name", "email");
 
-  const OTP = randomOTPGenerator();
+  const email = await User.findOne({ email: filteredData.email });
+
+  if (email)
+    return res.status(401).json({
+      status: "fail",
+      message: "User already exists!",
+    });
+
+  let OTP = randomOTPGenerator();
+
+  if (String(OTP).length === 7) {
+    OTP = String(OTP).slice(0, -1);
+  }
 
   const url = `${req.protocol}//:${req.get("host")}/`;
 
@@ -62,7 +73,7 @@ exports.signup = catchAsync(async (req, res) => {
     "gender"
   );
   const user = await User.create(filteredData);
-  createAndSendToken(user, 201, res);
+  createAndSendToken(req, user, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -75,7 +86,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.validateUserPassword(password, user.password)))
     return next(new ApiError("Incorrect email or password", 401));
 
-  createAndSendToken(user, 200, res);
+  createAndSendToken(req, user, 200, res);
 });
 
 exports.closeAccount = catchAsync(async (req, res, next) => {
@@ -90,7 +101,7 @@ exports.closeAccount = catchAsync(async (req, res, next) => {
 
   await User.findByIdAndDelete(req.user._id);
 
-  res.status(204).json({
+  res.status(200).json({
     status: "success",
     data: null,
   });
@@ -152,7 +163,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
-    console.log(err);
 
     return next(new ApiError("There was an error sending the email. Try again later!", 500));
   }
@@ -177,7 +187,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  createAndSendToken(user, 200, res);
+  createAndSendToken(req, user, 200, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -193,7 +203,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
   // login the user and send JWT
-  createAndSendToken(user, 200, res);
+  createAndSendToken(req, user, 200, res);
 });
 
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
@@ -237,4 +247,3 @@ exports.restrict =
 
     next();
   };
- 

@@ -1,0 +1,19 @@
+extends base
+
+block content 
+    header.header
+        nav.nav--logo
+            a.nav__ele.header--logo(href='/')
+                img.header__logo.icons(src='/icons/auth.svg' alt='GreenBuy logo')
+                span.logo-title Auth
+        nav.links
+            a.my-account#logout-user(href='#') logout
+    .user-base
+        each user in users
+            .user-detail(data-id=`${user._id}`)
+                img(src=`/img/users/${user.photo}`, alt=`${user.name}`)
+                div.name-txt
+                    h1.user-namee= user.name
+                -const date = new Date(user.createdAt) 
+                h2.user-date= `${date.toString().split(" ").slice(0,4).join(" ")}`
+                button#deleteUser.delete-user Delete user
