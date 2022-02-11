@@ -3,6 +3,7 @@ const path = require("path");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
+const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
@@ -24,6 +25,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // set security HTPP headers
 app.use(helmet());
+
+app.use(compression());
 
 app.use(cors());
 

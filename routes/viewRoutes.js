@@ -4,6 +4,7 @@ const authController = require("../controller/auth-controller");
 
 router.route("/signup").get(viewController.signup);
 router.route("/").get(viewController.login);
+router.route("/login").get(viewController.login);
 
 router.route("/overview").get(authController.isLoggedIn, viewController.overview);
 
