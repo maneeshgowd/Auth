@@ -56,7 +56,7 @@ const repeatPassword = document.getElementById("repeatPassword");
 
 const userLogin = async function (data) {
   try {
-    const request = await fetch(`http://127.0.0.1:3000/api/v1/users/login`, {
+    const request = await fetch(`/api/v1/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const userLogin = async function (data) {
 
 const logoutUser = async function () {
   try {
-    const request = await fetch(`http://127.0.0.1:3000/api/v1/users/logout`, {
+    const request = await fetch(`/api/v1/users/logout`, {
       method: "GET",
       mode: "cors",
     });
@@ -97,7 +97,7 @@ const logoutUser = async function () {
 
 const deleteUserDB = async function (id) {
   try {
-    const deleteRequest = await fetch(`http://127.0.0.1:3000/api/v1/users/deleteUser/${id}`, {
+    const deleteRequest = await fetch(`/api/v1/users/deleteUser/${id}`, {
       method: "DELETE",
     });
     const response = await deleteRequest.json();
@@ -112,7 +112,7 @@ const deleteUserDB = async function (id) {
 
 const deleteUserUser = async function (data) {
   try {
-    const request = await fetch(`http://127.0.0.1:3000/api/v1/users/deleteMe`, {
+    const request = await fetch(`/api/v1/users/deleteMe`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -135,7 +135,7 @@ const deleteUserUser = async function (data) {
 
 const userSignup = async function (data, endPoint) {
   try {
-    const request = await fetch(`http://127.0.0.1:3000/api/v1/users/${endPoint}`, {
+    const request = await fetch(`/api/v1/users/${endPoint}`, {
       method: `POST`,
       headers: {
         "Content-Type": "application/json",
@@ -158,7 +158,7 @@ const userSignup = async function (data, endPoint) {
 
 const forgetPassword = async function (email) {
   try {
-    const request = await fetch(`http://127.0.0.1:3000/api/v1/users/forgotPassword`, {
+    const request = await fetch(`/api/v1/users/forgotPassword`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -181,7 +181,7 @@ const forgetPassword = async function (email) {
 
 const resetForgetPassword = async function (data, token) {
   try {
-    const request = await fetch(`http://127.0.0.1:3000/api/v1/users/resetPassword/${token}`, {
+    const request = await fetch(`/api/v1/users/resetPassword/${token}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -525,7 +525,7 @@ searchGitUser?.addEventListener("click", async function () {
   const username = searchInput?.value.trim().split(" ").join("");
 
   try {
-    const request = await fetch(`http://127.0.0.1:3000/api/v1/users/gitData`, {
+    const request = await fetch(`/api/v1/users/gitData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -608,7 +608,7 @@ function htmlAdder(data) {
       </div>
       </div>`;
 
-  if(gitResult.innerHTML) gitResult.innerHTML = "";
+  if (gitResult.innerHTML) gitResult.innerHTML = "";
 
   gitResult.insertAdjacentHTML("beforeend", html);
 
